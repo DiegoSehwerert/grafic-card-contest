@@ -1,70 +1,108 @@
-class Hamburguer extends HTMLElement {
+class HamburguerMenu extends HTMLElement {
   constructor() {
-      super();
-      this.shadow = this.attachShadow({ mode: 'open' });
+    super();
+    this.shadow = this.attachShadow({ mode: 'open' });
   }
 
   connectedCallback() {
-      this.render();
+    this.render();
   }
 
   render() {
-      this.shadow.innerHTML = /*HTML*/ `
-  <style>
-    :host {
-      position:relative;
-    }     
-    .hamburguer {
-      position: relative;
-    }
-    .hamburguer button {
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
+    this.shadow.innerHTML = /*HTML*/ `
+      <style>
+        button {
+          background: transparent;
+          border: none;
+          cursor: pointer;
+        }
 
-    .hamburguer-menu-container{
-     height:100vw;
-     width:100vh;
-    }
-    .hamburguer-menu{
-      background-color: white;
-      max-width: 400px;
-      min-width: 400px;
-      height: 100%;
-      transition: margin-left 0.6s;
-    }
+        .menu {
+          background-color: hsl(207, 85%, 69%);
+          transition: all 0.5s;
+          right: -100vw; /* Cambié left a right y -100vh a -100vw */
+          top: 0;
+          position: fixed;
+          max-width: 400px;
+          min-width: 400px;
+          z-index: 1;
+          height: 100vh; /* Añadí height: 100vh para cubrir toda la pantalla verticalmente */
+        }
 
-  </style>
-    <div class="hamburguer">
-      <button>
-        <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;">
-          <g>
-            <circle cx="14.143" cy="8" r="1.857"></circle>
-            <circle cx="7.996" cy="8" r="1.857"></circle>
-            <circle cx="1.857" cy="8" r="1.857"></circle>
-          </g>
+        .menu-active {
+          right: 0; /* Cambié left a right y 0 a 0 */
+        }
+
+        .menu-button {
+          position: relative;
+          z-index: 2;
+        }
+
+        .menu-button svg {
+          width: 3rem;
+        }
+
+        .menu-button .line {
+          fill: none;
+          stroke: hsl(0, 0%, 100%);
+          stroke-width: 6;
+          transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+            stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-button .top-line {
+          stroke-dasharray: 60 207;
+          stroke-width: 6;
+        }
+
+        .menu-button .middle-line {
+          stroke-dasharray: 60 60;
+          stroke-width: 6;
+        }
+
+        .menu-button .bottom-line {
+          stroke-dasharray: 60 207;
+          stroke-width: 6;
+        }
+
+        .menu-button.active .top-line {
+          stroke-dasharray: 90 207;
+          stroke-dashoffset: -134;
+          stroke-width: 6;
+        }
+
+        .menu-button.active .middle-line {
+          stroke-dasharray: 1 60;
+          stroke-dashoffset: -30;
+          stroke-width: 6;
+        }
+
+        .menu-button.active .bottom-line {
+          stroke-dasharray: 90 207;
+          stroke-dashoffset: -134;
+          stroke-width: 6;
+        }
+      </style>
+      <div class="menu"></div>
+      <button class="menu-button">
+        <svg viewBox="0 0 100 100">
+          <path class="line top-line"
+            d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
+          <path class="line middle-line" d="M 20,50 H 80" />
+          <path class="line bottom-line"
+            d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
         </svg>
       </button>
-    </div>
-    <div class="hamburguer-menu-container">
-      <div class="hamburguer-menu">
-      <span> lorem ipsum <span>
-      <span> lorem ipsum <span>
-      <span> lorem ipsum <span>
-      <span> lorem ipsum <span>
-      <span> lorem ipsum <span>
-      <span> lorem ipsum <span>
-      <span> lorem ipsum <span>
-      <span> lorem ipsum <span>
-      <span> lorem ipsum <span>
-      <span> lorem ipsum <span>
-      <span> lorem ipsum <span>
-      <span> lorem ipsum <span>
-      </div>
-    </div>
-  `;
+    `;
+
+    const menuButton = this.shadow.querySelector(".menu-button");
+    const menu = this.shadow.querySelector(".menu");
+
+    menuButton?.addEventListener("click", () => {
+      menuButton.classList.toggle("active");
+      menu.classList.toggle("menu-active");
+    });
   }
 }
 
-customElements.define('hamburguer-component', Hamburguer);
+customElements.define('hamburguer-component', HamburguerMenu);
