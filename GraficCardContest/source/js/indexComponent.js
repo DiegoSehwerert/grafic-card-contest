@@ -2,13 +2,6 @@ class Index extends HTMLElement {
     constructor() {
         super();
         this.shadow = this.attachShadow({ mode: 'open' });
-
-        this.menuData = [
-            { "label": "HOME" },
-            { "label": "BAKERY", "subMenu": ["Cake", "Bread", "Patisserie"] },
-            { "label": "ORDER" },
-            { "label": "CONTACT" }
-        ];
     }
 
     connectedCallback() {
@@ -59,6 +52,10 @@ class Index extends HTMLElement {
                     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
                     z-index: 1;
                 }
+                
+                .dropdown-content-container {
+                  display:flex
+                }
 
                 .dropdown-content a {
                     float: none;
@@ -78,18 +75,75 @@ class Index extends HTMLElement {
                 }
             </style>
             <div class="container">
-            <a href="#home">Home</a>
-            <a href="#news">News</a>
             <div class="dropdown">
-              <button class="dropbtn">Dropdown</button>
+              <button class="dropbtn">Juegos</button>
               <div class="dropdown-content">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
+                <div class="dropdown-content-container">
+                  <div class="content-container">
+                    <p>Explorar juegos</p>
+                    <a href="#">Ultimos juegos</a>
+                    <a href="#">Proximamente</a>
+                    <a href="#">Juegos gratuitos</a>
+                    <a href="#">EA SPORT</a>
+                    <a href="#">EA Originals</a>
+                    <a href="#">Biblioteca de juegos</a>
+                    <a href="#">Ofertas de la EA app</a>
+                  </div>
+                  <div class="content-container">
+                    <p>Plataformas</p>
+                    <a href="#">PC</a>
+                    <a href="#">PlayStation 5</a>
+                    <a href="#">XboxSeries X</a>
+                    <a href="#">Nintendo Switch</a>
+                    <a href="#">Moviles</a>
+                  </div>
+                </div>
               </div>
-            </div> 
-            <a href="#news">Link</a>
-          </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Experiencias </button>
+                <div class="dropdown-content">
+                  <a href="#">Ea Play</a>
+                  <a href="#">Ea App</a>
+                  <a href="#">Juego competitivo</a>
+                  <a href="#">Ea Play Live</a>
+                  <a href="#">Pruebas de juego</a>
+                </div>
+            </div>
+            <div class="dropdown">
+              <button class="dropbtn">Acerca de</button>
+              <div class="dropdown-content">
+                <a href="#">Compañia</a>
+                <a href="#">Estudios de EA</a>
+                <a href="#">Trabajar en EA</a>
+                <a href="#">Nuestra tecnologia</a>
+                <a href="#">EA Partners</a>
+                <a href="#">Noticias</a>
+                <a href="#">EA por dentro</a>
+              </div>
+            </div>
+            <div class="dropdown">
+              <button class="dropbtn">Compromisos</button>
+              <div class="dropdown-content">
+                <a href="#">Nuestros Compromisos</a>
+                <a href="#">Juego positivo</a>
+                <a href="#">Diversidad e inclusion</a>
+                <a href="#">Impacto Social</a>
+                <a href="#">Empleados y cultura</a>
+                <a href="#">Medioambiente</a>
+              </div>
+            </div>
+            <div class="dropdown">
+              <button class="dropbtn">Recursos</button>
+              <div class="dropdown-content">
+                <a href="#">Ayudas</a>
+                <a href="#">Foros</a>
+                <a href="#">Herram. parentales y de juegos</a>
+                <a href="#">Accesibilidad</a>
+                <a href="#">Prensa</a>
+                <a href="#">Inversores</a>
+              </div>
+            </div>
         `;
     }
 }

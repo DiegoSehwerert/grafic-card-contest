@@ -109,22 +109,35 @@ class Carousel extends HTMLElement {
         const nextButton = this.shadow.getElementById("slide-arrow-next");
         
         let currentIndex = 0;
-        
+    
         const handleNextClick = () => {
           const slideWidth = slide.clientWidth;
           currentIndex = (currentIndex + 1) % slidesContainer.children.length;
           slidesContainer.scrollLeft = currentIndex * slideWidth;
         };
-        
+    
         const handlePrevClick = () => {
           const slideWidth = slide.clientWidth;
           currentIndex = (currentIndex - 1 + slidesContainer.children.length) % slidesContainer.children.length;
           slidesContainer.scrollLeft = currentIndex * slideWidth;
         };
-        
+    
         nextButton.addEventListener("click", handleNextClick);
         prevButton.addEventListener("click", handlePrevClick);
+      }
+    
+      startAutoSlide() {
+        setInterval(() => {
+          const slidesContainer = this.shadow.getElementById("slides-container");
+          const slide = this.shadow.querySelector(".slide");
+          const slideWidth = slide.clientWidth;
+          const totalSlides = slidesContainer.children.length;
+    
+          this.currentIndex = (this.currentIndex + 1) % totalSlides;
+          slidesContainer.scrollLeft = this.currentIndex * slideWidth;
+        }, 1000); // Change to 1000 milliseconds (1 second) for a 1-second interval
+      }
   }
-}
+
 
 customElements.define('wc-carousel-lite', Carousel);

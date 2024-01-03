@@ -19,20 +19,23 @@ class Header extends HTMLElement {
         }
         nav{
           display:flex;
+          justify-content: Space-evenly;
         }
         span{
-          color: white;
+          color: Blue;
         }
         
         .hamburguer,
         .web-title {
           display: flex;
           align-items: center; /* Para centrar verticalmente los elementos en su contenedor */
+          justify-content: center;
         }
 
         .web-title {
-          margin-left: 20px; /* Añadí un margen izquierdo para separar los elementos */
+          padding:1rem;
         }
+
       </style>
       <nav>
         <div class="hamburguer">
