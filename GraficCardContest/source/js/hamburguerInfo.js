@@ -15,22 +15,23 @@ class HamburguerMenu extends HTMLElement {
           background: transparent;
           border: none;
           cursor: pointer;
+          
         }
 
         .menu {
           background-color: hsl(207, 85%, 69%);
-          transition: all 0.5s;
-          right: -100vw; /* Cambié left a right y -100vh a -100vw */
+          transition: all 0.2s, left 0.2s ease-in-out; /* Agregada animación de desplazamiento desde la izquierda */
+          left: -100vw; /* Cambiado de right a left y -100vw para que el menú comience fuera de la pantalla a la izquierda */
           top: 0;
           position: fixed;
           max-width: 400px;
           min-width: 400px;
           z-index: 1;
-          height: 100vh; /* Añadí height: 100vh para cubrir toda la pantalla verticalmente */
+          height: 100vh;
         }
 
         .menu-active {
-          right: 0; /* Cambié left a right y 0 a 0 */
+          left: 0;
         }
 
         .menu-button {
@@ -40,14 +41,16 @@ class HamburguerMenu extends HTMLElement {
 
         .menu-button svg {
           width: 3rem;
+          fill: black;
         }
 
         .menu-button .line {
           fill: none;
-          stroke: hsl(0, 0%, 100%);
+          stroke: black; /* Cambiado de hsl(0, 0%, 100%) a black para invertir el color de las líneas */
           stroke-width: 6;
           transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
             stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+            stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1); /* Añadida una transición para el color de la línea */
         }
 
         .menu-button .top-line {
@@ -69,18 +72,21 @@ class HamburguerMenu extends HTMLElement {
           stroke-dasharray: 90 207;
           stroke-dashoffset: -134;
           stroke-width: 6;
+          
         }
 
         .menu-button.active .middle-line {
           stroke-dasharray: 1 60;
           stroke-dashoffset: -30;
           stroke-width: 6;
+          
         }
 
         .menu-button.active .bottom-line {
           stroke-dasharray: 90 207;
           stroke-dashoffset: -134;
           stroke-width: 6;
+          
         }
       </style>
       <div class="menu"></div>
