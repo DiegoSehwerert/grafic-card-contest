@@ -6,6 +6,59 @@ class Carousel extends HTMLElement {
 
   connectedCallback() {
     this.render();
+    this.initializeSlider();
+  }
+
+  initializeSlider() {
+    const slidesContainer = this.shadow.getElementById("slides-container");
+    const slide = this.shadow.querySelector(".slide");
+    const prevButton = this.shadow.getElementById("slide-arrow-prev");
+    const nextButton = this.shadow.getElementById("slide-arrow-next");
+    const indicatorWrapper = this.shadow.getElementById("indicator-wrapper");
+
+    let currentIndex = 0;
+
+    const handleNextClick = () => {
+      const slideWidth = slide.clientWidth;
+      currentIndex = (currentIndex + 1) % slidesContainer.children.length;
+      slidesContainer.scrollLeft = currentIndex * slideWidth;
+      updateIndicators();
+    };
+
+    const intervalo = setInterval(handleNextClick, 4000);
+
+    const handlePrevClick = () => {
+      const slideWidth = slide.clientWidth;
+      currentIndex = (currentIndex - 1 + slidesContainer.children.length) % slidesContainer.children.length;
+      slidesContainer.scrollLeft = currentIndex * slideWidth;
+      updateIndicators();
+    };
+
+    const updateIndicators = () => {
+      const indicators = Array.from(indicatorWrapper.children);
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle("active", index === currentIndex);
+      });
+    };
+
+    // Crear indicadores
+    for (let i = 0; i < slidesContainer.children.length; i++) {
+      const indicator = document.createElement("div");
+      indicator.classList.add("indicator");
+      indicator.addEventListener("click", () => {
+        currentIndex = i;
+        const slideWidth = slide.clientWidth;
+        slidesContainer.scrollLeft = currentIndex * slideWidth;
+        updateIndicators();
+      });
+      indicatorWrapper.appendChild(indicator);
+    }
+
+    // Marcar el primer indicador como activo al cargar la página
+    updateIndicators();
+
+    nextButton.addEventListener("click", handleNextClick);
+    prevButton.addEventListener("click", handlePrevClick);
   }
 
   render() {
@@ -40,7 +93,7 @@ class Carousel extends HTMLElement {
             bottom: 0;
             margin: auto;
             height: 4rem;
-            background-color: white;
+            background: none;
             border: none;
             width: 2rem;
             font-size: 3rem;
@@ -68,17 +121,50 @@ class Carousel extends HTMLElement {
           
           .slide {
             align-items: center;
-            background-color: #111821;
+            background-color: #ffffff;
             display: flex;
             flex: 1 0 100%;
+            flex-direction:column;
             justify-content: center;
             width: 100%;
           }
+          .button{
+              align-items:center;
+              border: 2px solid #000000;
+              display:flex;
+              margin-top:2rem;
+              text-decoration:none;
+            }
+            .button:visited {
+              color: inherit;
+            }
+            .button_content{
+              padding: 16px 24px;
+            }
           
           img {
             box-sizing: border-box; 
             width: 50%;
             object-fit: cover;
+          }
+
+          .indicator-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+          }
+
+          .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #999;
+            margin: 0 5px;
+            cursor: pointer;
+          }
+
+          .indicator.active {
+            background-color: #333;
           }
       
         </style>
@@ -92,52 +178,39 @@ class Carousel extends HTMLElement {
           <div class="slides-container" id="slides-container">
             <div class="slide">
               <img src="./source/images/bloodborne.webp" alt="bloodborne-the-board-game">
+              <a href="#" class="button">
+                <p class="button_content">Comprar</p>
+              </a>
             </div>
             <div class="slide">
               <img src="./source/images/sekiro-shadows-die-twice-screen-01-ps4-eu-21jun18.webp" alt="sekiro">
+              <a href="#" class="button">
+                <p class="button_content">Comprar</p>
+              </a>
             </div>
             <div class="slide">
               <img src="./source/images/Tom-Clancys-The-Division.jpg" alt="Tom-Clancys-The-Division">
+              <a href="#" class="button">
+                <p class="button_content">Comprar</p>
+              </a>
+            </div>
+            <div class="slide">
+              <img src="./source/images/Tom-Clancys-The-Division.jpg" alt="Tom-Clancys-The-Division">
+              <a href="#" class="button">
+                <p class="button_content">Comprar</p>
+              </a>
+            </div>
+            <div class="slide">
+              <img src="./source/images/Tom-Clancys-The-Division.jpg" alt="Tom-Clancys-The-Division">
+              <a href="#" class="button">
+                <p class="button_content">Comprar</p>
+              </a>
             </div>
           </div>
+          <div class="indicator-wrapper" id="indicator-wrapper"></div>
         </div>
-
         `;
-        const slidesContainer = this.shadow.getElementById("slides-container");
-        const slide = this.shadow.querySelector(".slide");
-        const prevButton = this.shadow.getElementById("slide-arrow-prev");
-        const nextButton = this.shadow.getElementById("slide-arrow-next");
-        
-        let currentIndex = 0;
-    
-        const handleNextClick = () => {
-          const slideWidth = slide.clientWidth;
-          currentIndex = (currentIndex + 1) % slidesContainer.children.length;
-          slidesContainer.scrollLeft = currentIndex * slideWidth;
-        };
-    
-        const handlePrevClick = () => {
-          const slideWidth = slide.clientWidth;
-          currentIndex = (currentIndex - 1 + slidesContainer.children.length) % slidesContainer.children.length;
-          slidesContainer.scrollLeft = currentIndex * slideWidth;
-        };
-    
-        nextButton.addEventListener("click", handleNextClick);
-        prevButton.addEventListener("click", handlePrevClick);
       }
+    }
     
-      startAutoSlide() {
-        setInterval(() => {
-          const slidesContainer = this.shadow.getElementById("slides-container");
-          const slide = this.shadow.querySelector(".slide");
-          const slideWidth = slide.clientWidth;
-          const totalSlides = slidesContainer.children.length;
-    
-          this.currentIndex = (this.currentIndex + 1) % totalSlides;
-          slidesContainer.scrollLeft = this.currentIndex * slideWidth;
-        }, 1000); // Change to 1000 milliseconds (1 second) for a 1-second interval
-      }
-  }
-
-
-customElements.define('wc-carousel-lite', Carousel);
+customElements.define('slider-component', Carousel);

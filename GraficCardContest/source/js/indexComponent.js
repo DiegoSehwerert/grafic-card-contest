@@ -13,14 +13,14 @@ class Index extends HTMLElement {
             <style>
                .container {
                     overflow: hidden;
-                    background-color: #333;
+                    background-color: #ffffff;
                     font-family: Arial;
                 }
 
                 .container a {
                     float: left;
                     font-size: 16px;
-                    color: white;
+                    color: #000000;
                     text-align: center;
                     padding: 14px 16px;
                     text-decoration: none;
@@ -35,7 +35,7 @@ class Index extends HTMLElement {
                     font-size: 16px;    
                     border: none;
                     outline: none;
-                    color: white;
+                    color: #000000;
                     padding: 14px 16px;
                     background-color: inherit;
                 }
