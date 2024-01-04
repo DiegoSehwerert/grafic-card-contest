@@ -10,127 +10,103 @@ class Tabs extends HTMLElement {
   }
 
   render() {
-    this.shadow.innerHTML = `
-      <style>
-        .tabs {
-          display: flex;
-          justify-content: center;
-          gap: 0.5rem;
-          margin-bottom: 1rem;
-        }
+    this.shadow.innerHTML = /*HTML*/`
+        <style>
+          :host{
+            width:100%;
+          }
 
-        .tab button {
-          height: 2.2rem;
-          padding: 0 2rem;
-          background-color: transparent;
-          border: none;
-          cursor: pointer;
-        }
+          section {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+          }
+          .tab-container {
+            width: 100%;
+            max-width: 80vw;
+            min-height: 30vh;
+          }
 
-        .tab.active {
-          background-color: rgb(41, 182, 182);
-        }
+          .tabs {
+            display: flex;
+            overflow: scroll;
+          }
 
-        .tab button p {
-          color: hsl(183.09, 97.77%, 35.1%);
-        }
+          .tabs::-webkit-scrollbar { 
+            width: 0;
+            height: 0;
+          }
 
-        .tab.active button p {
-          color: white;
-        }
+          .tabs button {
+            width: 100%;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            background: none;
+            color: #000000;
+            opacity: 0.6;
+          }
 
-        .tab-content {
-          display: none;
-        }
+          .tabs button.active,
+          .tabs button:hover {
+            opacity: 1;
+          }
 
-        .tab-content.active {
-          display: flex;
-        }
+          .tab-content {
+            align-items:center;
+            display:flex;
+            justify-content:center;
+            max-width: 80vw;
+            margin-top:2rem;
+          }
 
-        .card {
-          text-align: center;
-          width: 100%;
-        }
+          .hidden {
+            display: none;
+          }
 
-        .card img {
-          max-width: 100%;
-          height: auto;
-        }
-      </style>
-
-      <div class="tabs">
-        ${this.tabsData.map((tab, index) => `
-          <div class="tab" data-index="${index}">
-            <button>
-              <p>${tab.tabTitle}</p>
-            </button>
-          </div>
-        `).join('')}
-      </div>
-
-      <form>
-        ${this.tabsData.map((tab, index) => `
-          <div class="tab-content ${index === 0 ? 'active' : ''}" data-index="${index}">
-            <div class="card">
-              <img src="${tab.image}" alt="Image ${index}">
-              <h2>${tab.title}</h2>
-              <p>${tab.description}</p>
+          a {
+            color: #fc7904;
+            text-decoration: none;
+          }
+        </style>
+        <section>
+          <h1>Ultimas noticias</h1>
+            <div class="tab-container">
+              <!--  Tab Buttons  -->
+            <div class="tabs">
+              <button class="tab active">Noticias</button>
+              <button class="tab">Sports</button>
+              <button class="tab">Star Wars</button>
             </div>
-          </div>
-        `).join('')}
-      </form>
-    `;
+              <!-- Tab Content  -->
+            <div class="tab-content">
+              <slot name="news"></slot>
+            </div>
+            <div class="tab-content hidden">
+              <slot name="sports"></slot>
+            </div>
+            <div class="tab-content hidden">
+              <slot name="star-wars"></slot>
+            </div>
+        </section>     
+      `;
+      
+    const tabs = this.shadow.querySelectorAll(".tab");
+    const tabContent = this.shadow.querySelectorAll(".tab-content");
 
-    const allTabs = this.shadow.querySelectorAll('.tab');
-    const tabContents = this.shadow.querySelectorAll('.tab-content');
-
-    allTabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => {
-        allTabs.forEach((t) => t.classList.remove('active'));
-        tab.classList.add('active');
-
-        tabContents.forEach((tabContent) => {
-          tabContent.classList.remove('active');
-        });
-
-        tabContents[index].classList.add('active');
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", function () {
+        tabs.forEach(tab => tab.classList.remove("active"));
+        this.classList.add("active");
+        tabContent.forEach(content => content.classList.add("hidden"));
+        tabContent[i].classList.remove("hidden");
       });
     });
   }
+
 }
 
-// Ejemplo de uso:
-const tabsData = [
-  {
-    image: './source/images/bloodborne.webp',
-    tabTitle: "no",
-    title: 'Título para la pestaña General',
-    description: 'Descripción para la pestaña General',
-  },
-  {
-    image: './source/images/bloodborne.webp',
-    tabTitle: "no",
-    title: 'Título para la pestaña Imágenes',
-    description: 'Descripción para la pestaña Imágenes',
-  },
-  {
-    image: './source/images/bloodborne.webp',
-    tabTitle: "no",
-    title: 'Título para la pestaña Imágenes',
-    description: 'Descripción para la pestaña X',
-  },
-  {
-    image: './source/images/bloodborne.webp',
-    tabTitle: "no",
-    title: 'Título para la pestaña No',
-    description: 'Descripción para la pestaña c',
-  },
-  // Puedes añadir más objetos para más pestañas según sea necesario
-];
-
 customElements.define('tabs-component', Tabs);
-
-// Crear una instancia del componente y pasar los datos de las pestañas
-const tabsComponent = document.createElement('tabs-component');
-tabsComponent.tabsData = tabsData;
-document.body.appendChild(tabsComponent);

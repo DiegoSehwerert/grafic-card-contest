@@ -121,7 +121,7 @@ class Carousel extends HTMLElement {
           
           .slide {
             align-items: center;
-            background-color: #ffffff;
+            background-color:#f3f3f3;
             display: flex;
             flex: 1 0 100%;
             flex-direction:column;
@@ -139,7 +139,7 @@ class Carousel extends HTMLElement {
               color: inherit;
             }
             .button_content{
-              padding: 16px 24px;
+              padding: 0.1rem 5rem;
             }
           
           img {

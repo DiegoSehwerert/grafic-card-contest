@@ -4,3 +4,6 @@ import "./hamburguerInfo.js";
 import "./indexComponent.js";
 import "./galleryComponent.js";
 import "./tabs.js";
+import "./newsComponent.js";
+import "./Sports.js";
+import "./starWars.js";

@@ -13,7 +13,7 @@ class Index extends HTMLElement {
             <style>
                .container {
                     overflow: hidden;
-                    background-color: #ffffff;
+                    background-color:inherit;
                     font-family: Arial;
                 }
 
