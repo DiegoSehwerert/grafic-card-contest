@@ -159,16 +159,19 @@ renderProductCard(product) {
 
 customElements.define('gallery-component', Gallery);
 
+try {
 const gallery = document.querySelector('gallery-component');
 
-const productos = [
-{ image: './source/images/ufc-51x1.jpg', smallImage: './source/images/ufc5-logo-reveal-white.png', link: './product.html' },
-{ image: './source/images/ufc-51x1.jpg', smallImage: './source/images/ufc5-logo-reveal-white.png', link: './product.html' },
-{ image: './source/images/ufc-51x1.jpg', smallImage: './source/images/ufc5-logo-reveal-white.png', link: './product.html' },
-{ image: './source/images/ufc-51x1.jpg', smallImage: './source/images/ufc5-logo-reveal-white.png', link: './product.html' },
-{ image: './source/images/ufc-51x1.jpg', smallImage: './source/images/ufc5-logo-reveal-white.png', link: './product.html' },
-{ image: './source/images/bloodborne.webp', smallImage: './source/images/ufc5-logo-reveal-white.png', link: './product.html' },
-// Agrega más productos según sea necesario
-];
+gallery.setProducts([
+  { image: './source/images/ufc-51x1.jpg', smallImage: './source/images/ufc5-logo-reveal-white.png', link: './product.html' },
+  { image: './source/images/ufc-51x1.jpg', smallImage: './source/images/ufc5-logo-reveal-white.png', link: './product.html' },
+  { image: './source/images/ufc-51x1.jpg', smallImage: './source/images/ufc5-logo-reveal-white.png', link: './product.html' },
+  { image: './source/images/ufc-51x1.jpg', smallImage: './source/images/ufc5-logo-reveal-white.png', link: './product.html' },
+  { image: './source/images/ufc-51x1.jpg', smallImage: './source/images/ufc5-logo-reveal-white.png', link: './product.html' },
+  { image: './source/images/bloodborne.webp', smallImage: './source/images/ufc5-logo-reveal-white.png', link: './product.html' },
+  // Agrega más productos según sea necesario
+]);
+} catch (error) {
+}
 
-gallery.setProducts(productos);
+

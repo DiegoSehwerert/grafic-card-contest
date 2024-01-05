@@ -139,16 +139,22 @@ class StarWars extends HTMLElement {
 
 customElements.define('star-wars-component', StarWars);
 
-const gallery = document.querySelector('star-wars-component');
+try {
+  const gallery = document.querySelector('star-wars-component');
 
-const productos = [
-  { image: './source/images/news.jpg', title: 'Conoce a fondo a Los Sims 4 Se alquila pack de Expansion', description: 'El equipo de diseño de Maxis nos muestra los nuevos complejos de alquiler residencial para llevar la narrativa Sim a viviendas multiunidades', link: './product.html' },
-  { image: './source/images/news.jpg', title: 'Actualizacion de las valoraciones de pilotos F! 23 (Septiembre)', description: 'El equipo de diseño de Maxis nos muestra los nuevos complejos de alquiler residencial para llevar la narrativa Sim a viviendas multiunidades.', link: './product.html' },
-  { image: './source/images/news.jpg', title: 'Revelación de kit - Soldado oscuro Moff Gideon', description: 'El equipo de diseño de Maxis nos muestra los nuevos complejos de alquiler residencial para llevar la narrativa Sim a viviendas multiunidades', link: './product.html' },
-  { image: './source/images/news.jpg', title: 'Conoce a fondo a Los Sims 4 Se alquila pack de Expansion',description: 'El equipo de diseño de Maxis nos muestra los nuevos complejos de alquiler residencial para llevar la narrativa Sim a viviendas multiunidades', link: './product.html' },
-  { image: './source/images/news.jpg', title: 'Conoce a fondo a Los Sims 4 Se alquila pack de Expansion',description: 'Conoce a Terrance y Shelley, miembros del equipo de VisX de Tiburon, y su papel para ofrecer los graficos mas inmersivos y autenticos hasta la fecha para nuestro publico de EA SPORTS Madden NFL 24', link: './product.html' },
-  { image: './source/images/news.jpg', title: 'Conoce a fondo a Los Sims 4 Se alquila pack de Expansion',description: 'El equipo de diseño de Maxis nos muestra los nuevos complejos de alquiler residencial para llevar la narrativa Sim a viviendas multiunidades', link: './product.html' },
-  // Agrega más productos según sea necesario
-];
+  const productos = [
+    { image: './source/images/news.jpg', title: 'Conoce a fondo a Los Sims 4 Se alquila pack de Expansion', description: 'El equipo de diseño de Maxis nos muestra los nuevos complejos de alquiler residencial para llevar la narrativa Sim a viviendas multiunidades', link: './product.html' },
+    { image: './source/images/news.jpg', title: 'Actualizacion de las valoraciones de pilotos F! 23 (Septiembre)', description: 'El equipo de diseño de Maxis nos muestra los nuevos complejos de alquiler residencial para llevar la narrativa Sim a viviendas multiunidades.', link: './product.html' },
+    { image: './source/images/news.jpg', title: 'Revelación de kit - Soldado oscuro Moff Gideon', description: 'El equipo de diseño de Maxis nos muestra los nuevos complejos de alquiler residencial para llevar la narrativa Sim a viviendas multiunidades', link: './product.html' },
+    { image: './source/images/news.jpg', title: 'Conoce a fondo a Los Sims 4 Se alquila pack de Expansion', description: 'El equipo de diseño de Maxis nos muestra los nuevos complejos de alquiler residencial para llevar la narrativa Sim a viviendas multiunidades', link: './product.html' },
+    { image: './source/images/news.jpg', title: 'Conoce a fondo a Los Sims 4 Se alquila pack de Expansion', description: 'Conoce a Terrance y Shelley, miembros del equipo de VisX de Tiburon, y su papel para ofrecer los graficos mas inmersivos y autenticos hasta la fecha para nuestro publico de EA SPORTS Madden NFL 24', link: './product.html' },
+    { image: './source/images/news.jpg', title: 'Conoce a fondo a Los Sims 4 Se alquila pack de Expansion', description: 'El equipo de diseño de Maxis nos muestra los nuevos complejos de alquiler residencial para llevar la narrativa Sim a viviendas multiunidades', link: './product.html' },
+    // Agrega más productos según sea necesario
+  ];
 
-gallery.setProducts(productos);
+  gallery.setProducts(productos);
+} catch (error) {
+
+}
+
+

@@ -7,3 +7,5 @@ import "./tabs.js";
 import "./newsComponent.js";
 import "./Sports.js";
 import "./starWars.js";
+import "./gameSlider.js";
+import "./emergentVideoComponent.js";
